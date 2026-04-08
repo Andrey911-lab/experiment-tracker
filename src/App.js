@@ -1,10 +1,21 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 
 function App() {
     const [experiments, setExperiments] = useState([]);
     const [name, setName] = useState('');
     const [status, setStatus] = useState('План');
     const [filter, setFilter] = useState('Все');
+
+    useEffect(() => {
+        const saved = localStorage.getItem('experiments');
+        if (saved) {
+            setExperiments(JSON.parse(saved));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('experiments', JSON.stringify(experiments));
+    }, [experiments]);
 
     const addExperiment = () => {
         if (name === '') return;
@@ -28,6 +39,8 @@ function App() {
     const filteredExperiments = filter === 'Все'
         ? experiments
         : experiments.filter(exp => exp.status === filter);
+
+    const completedCount = experiments.filter(exp => exp.status === 'Завершён').length;
 
     return (
         <div>
@@ -63,6 +76,10 @@ function App() {
                     </li>
                 ))}
             </ul>
+
+            <div>
+                <strong>Завершённых экспериментов: {completedCount}</strong>
+            </div>
         </div>
     );
 }
