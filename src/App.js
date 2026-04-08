@@ -1,9 +1,9 @@
-import React from 'react';
+п»їimport React from 'react';
 
 function App() {
     return (
         <div>
-            <h1>Учёт экспериментов</h1>
+            <h1>РЈС‡С‘С‚ СЌРєСЃРїРµСЂРёРјРµРЅС‚РѕРІ</h1>
         </div>
     );
 }
