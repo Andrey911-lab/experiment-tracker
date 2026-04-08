@@ -17,6 +17,11 @@ function App() {
         setStatus('План');
     };
 
+    const deleteExperiment = (id) => {
+        const newList = experiments.filter(exp => exp.id !== id);
+        setExperiments(newList);
+    };
+
     const statuses = ['План', 'В процессе', 'Завершён'];
 
     return (
@@ -42,6 +47,7 @@ function App() {
                 {experiments.map(exp => (
                     <li key={exp.id}>
                         {exp.name} - {exp.status}
+                        <button onClick={() => deleteExperiment(exp.id)}>Удалить</button>
                     </li>
                 ))}
             </ul>
