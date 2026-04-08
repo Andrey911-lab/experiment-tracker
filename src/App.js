@@ -17,9 +17,26 @@ function App() {
         setStatus('План');
     };
 
+    const statuses = ['План', 'В процессе', 'Завершён'];
+
     return (
         <div>
             <h1>Учёт экспериментов</h1>
+
+            <div>
+                <input
+                    type="text"
+                    placeholder="Название эксперимента"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                    {statuses.map(s => (
+                        <option key={s} value={s}>{s}</option>
+                    ))}
+                </select>
+                <button onClick={addExperiment}>Добавить</button>
+            </div>
         </div>
     );
 }
