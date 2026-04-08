@@ -4,6 +4,7 @@ function App() {
     const [experiments, setExperiments] = useState([]);
     const [name, setName] = useState('');
     const [status, setStatus] = useState('План');
+    const [filter, setFilter] = useState('Все');
 
     const addExperiment = () => {
         if (name === '') return;
@@ -24,6 +25,10 @@ function App() {
 
     const statuses = ['План', 'В процессе', 'Завершён'];
 
+    const filteredExperiments = filter === 'Все'
+        ? experiments
+        : experiments.filter(exp => exp.status === filter);
+
     return (
         <div>
             <h1>Учёт экспериментов</h1>
@@ -43,8 +48,15 @@ function App() {
                 <button onClick={addExperiment}>Добавить</button>
             </div>
 
+            <div>
+                <button onClick={() => setFilter('Все')}>Все</button>
+                <button onClick={() => setFilter('План')}>План</button>
+                <button onClick={() => setFilter('В процессе')}>В процессе</button>
+                <button onClick={() => setFilter('Завершён')}>Завершён</button>
+            </div>
+
             <ul>
-                {experiments.map(exp => (
+                {filteredExperiments.map(exp => (
                     <li key={exp.id}>
                         {exp.name} - {exp.status}
                         <button onClick={() => deleteExperiment(exp.id)}>Удалить</button>
