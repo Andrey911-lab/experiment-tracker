@@ -37,6 +37,14 @@ function App() {
                 </select>
                 <button onClick={addExperiment}>Добавить</button>
             </div>
+
+            <ul>
+                {experiments.map(exp => (
+                    <li key={exp.id}>
+                        {exp.name} - {exp.status}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
